@@ -9,3 +9,4 @@ const CourseSchema = new Schema({
 var Course = moongose.model("Course", CourseSchema);
 
 module.exports = Course;
+
