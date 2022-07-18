@@ -308,4 +308,72 @@ app.delete("/directives/:id", (req, res) => {
 })
 
 /* /-------------------------directive petitions------------------------- */
+
+/* -------------------------student petitions------------------------- */
+//create
+app.post("/students", function(req, res) {
+    let { student } = req.body;
+    controller.setStudent(student, res);
+})
+
+
+//show
+app.get("/students", (req, res) => {
+    controller.getStudents(res);
+})
+
+//show for id
+app.get("/students/:id", (req, res) => {
+    let { id } = req.params;
+    controller.getStudent(id, res);
+})
+
+//update
+app.put("/students/:id", (req, res) => {
+    let student = req.body.student;
+    student.id = req.params.id;
+    controller.updateStudent(student, res);
+});
+
+//delete
+app.delete("/students/:id", (req, res) => {
+    let { id } = req.params;
+    controller.deleteStudent(id, res);
+})
+
+/* /-------------------------student petitions------------------------- */
+
+/* -------------------------teacher petitions------------------------- */
+//create
+app.post("/teachers", function(req, res) {
+    let { teacher } = req.body;
+    controller.setTeacher(teacher, res);
+})
+
+
+//show
+app.get("/teachers", (req, res) => {
+    controller.getTeachers(res);
+})
+
+//show for id
+app.get("/teachers/:id", (req, res) => {
+    let { id } = req.params;
+    controller.getTeacher(id, res);
+})
+
+//update
+app.put("/teachers/:id", (req, res) => {
+    let teacher = req.body.teacher;
+    teacher.id = req.params.id;
+    controller.updateTeacher(teacher, res);
+});
+
+//delete
+app.delete("/teachers/:id", (req, res) => {
+    let { id } = req.params;
+    controller.deleteTeacher(id, res);
+})
+
+/* /-------------------------teacher petitions------------------------- */
 exports.app = app;

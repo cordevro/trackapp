@@ -8,6 +8,8 @@ const Topic = require("./models/Topic");
 const Subtopic = require("./models/Subtopic");
 const Exercise = require("./models/Exercise");
 const Directive = require("./models/Directive");
+const Student = require("./models/Student");
+const Teacher = require("./models/Teacher");
 
 
 class Controller{
@@ -531,6 +533,120 @@ class Controller{
         })
     }
 /*/------------------------------------CRUD DIRECTIVE/*------------------------------------*/
+
+/*------------------------------------CRUD STUDENT------------------------------------*/
+    //CREATE
+    setStudent(student, res) {
+        Student.create(student, function(err, newStudent) {
+            if (err) throw err;
+
+            res.send({status: 200, nU: newStudent});
+        });
+    }
+
+
+    //READ
+    getStudents(res){
+        Student.find({}, (err, students)=>{
+
+            if(err) throw err;
+
+            res.send( students );
+        })
+    }
+
+    getStudent(id, res){
+
+        Student.find({_id : id}, (err, student)=>{
+
+            if(err) throw err;
+
+            res.send( {Student : student} );
+        })
+    }
+
+    //UPDATE
+    updateStudent(student, res) {
+        let { id, people_id } = student;
+        Student.updateOne(
+            {_id: id},
+            {$set: {people_id: people_id}}
+            )
+            .then(rawResponse => {
+                res.send({ message: "Student updated", raw: rawResponse })
+            })
+            .catch(err => {
+                if(err) throw err;
+            });
+            ;
+    }
+    
+
+    //DELETE
+    deleteStudent(id, res){
+        Student.deleteOne({_id : id}, (err)=>{
+            if(err) throw err;
+            res.send( {message : "Student has been deleted"} );
+        })
+    }
+/*/------------------------------------CRUD STUDENT/*------------------------------------*/
+
+/*------------------------------------CRUD TEACHERS------------------------------------*/
+    //CREATE
+    setTeacher(teacher, res) {
+        Teacher.create(teacher, function(err, newTeacher) {
+            if (err) throw err;
+
+            res.send({status: 200, nU: newTeacher});
+        });
+    }
+
+
+    //READ
+    getTeachers(res){
+        Teacher.find({}, (err, teachers)=>{
+
+            if(err) throw err;
+
+            res.send( teachers );
+        })
+    }
+
+    getTeacher(id, res){
+
+        Teachers.find({_id : id}, (err, teacher)=>{
+
+            if(err) throw err;
+
+            res.send( {Teacher : teacher} );
+        })
+    }
+
+    //UPDATE
+    updateTeacher(teacher, res) {
+        let { id, people_id } = teacher;
+        Teacher.updateOne(
+            {_id: id},
+            {$set: {people_id: people_id}}
+            )
+            .then(rawResponse => {
+                res.send({ message: "Teacher updated", raw: rawResponse })
+            })
+            .catch(err => {
+                if(err) throw err;
+            });
+            ;
+    }
+    
+
+    //DELETE
+    deleteTeacher(id, res){
+        Teacher.deleteOne({_id : id}, (err)=>{
+            if(err) throw err;
+            res.send( {message : "Teacher has been deleted"} );
+        })
+    }
+/*/------------------------------------CRUD TEACHERS/*------------------------------------*/
 }
 
 exports.controller = new Controller;
